@@ -11,7 +11,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero container flex items-center justify-between" style={{ minHeight: '80vh' }}>
         <div style={{ maxWidth: '800px' }}>
-          <h1 className="mono text-primary" style={{ fontSize: '3rem', marginBottom: '1.5rem', textShadow: '0 0 10px var(--color-primary-glow)', minHeight: '1.2em' }}>
+          <h1 className="mono text-primary" style={{ fontSize: '3rem', marginBottom: '1.5rem', textShadow: '0 0 10px var(--color-primary-glow)', minHeight: '1.2em', color: 'var(--color-primary)' }}>
             &gt; <Typewriter 
               strings={[
                 "Human_Code_Reader",
