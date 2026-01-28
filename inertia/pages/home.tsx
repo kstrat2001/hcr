@@ -1,5 +1,7 @@
 import { Head } from '@inertiajs/react'
 import MainLayout from '../components/layout/MainLayout'
+import Typewriter from '../components/common/Typewriter'
+import TerminalForm from '../components/common/TerminalForm'
 
 export default function Home() {
   return (
@@ -8,9 +10,18 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="hero container flex items-center justify-between" style={{ minHeight: '80vh' }}>
-        <div style={{ maxWidth: '600px' }}>
-          <h1 className="mono text-primary" style={{ fontSize: '3.5rem', marginBottom: '1.5rem', textShadow: '0 0 10px var(--color-primary-glow)' }}>
-            &gt; Human_Code_Reader
+        <div style={{ maxWidth: '800px' }}>
+          <h1 className="mono text-primary" style={{ fontSize: '3rem', marginBottom: '1.5rem', textShadow: '0 0 10px var(--color-primary-glow)', minHeight: '1.2em' }}>
+            &gt; <Typewriter 
+              strings={[
+                "Human_Code_Reader",
+                "From_Prompt_To_Prod",
+                "Debugging_Hallucinations",
+                "Scaling_Your_Dreams"
+              ]}
+              typeSpeed={70}
+              backSpeed={40}
+            />
           </h1>
           <p style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--color-text-muted)' }}>
             Don't let your vibes <span style={{ textDecoration: 'line-through', color: '#ff4141' }}>break production</span>.
@@ -27,19 +38,21 @@ export default function Home() {
             [Get_Verified]
           </a>
         </div>
-        <div className="hero-visual" style={{ 
+        <div className="hero-visual eye-visual-container" style={{ 
           width: '400px', 
           height: '400px', 
           border: '1px solid var(--color-primary)',
           boxShadow: '0 0 20px var(--color-primary-glow)',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          background: 'rgba(0, 255, 65, 0.05)'
+          justifyContent: 'center'
         }}>
-          <div className="mono text-center" style={{ color: 'var(--color-primary)' }}>
-            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>👁️</div>
-            <div>SCANNING...</div>
+          {/* Scanning Line */}
+          <div className="scan-line"></div>
+          
+          <div className="mono text-center glitch-text" style={{ color: 'var(--color-primary)' }}>
+            <div style={{ fontSize: '6rem', marginBottom: '1rem', lineHeight: 1 }}>👁️</div>
+            <div style={{ letterSpacing: '4px', fontWeight: 'bold' }}>SCANNING...</div>
           </div>
         </div>
       </section>
@@ -162,8 +175,8 @@ export default function Home() {
                   </div>
                   
                   <div style={{ marginBottom: '0.5rem' }}>
-                    <span style={{ color: '#888' }}>[2008-2014]</span> <strong className="text-white">AnalogPixels</strong><br/>
-                    &gt; Founder, iOS & OpenGL Engines
+                    <span style={{ color: '#888' }}>[2008-2014]</span> <strong className="text-white">Various Studios</strong><br/>
+                    &gt; Game Developer (Graphics, OpenGL, Shaders)
                   </div>
 
                   <hr style={{ borderColor: '#333', margin: '1rem 0' }} />
@@ -187,18 +200,9 @@ export default function Home() {
           <p style={{ fontSize: '1.2rem', marginBottom: '3rem' }}>
             Send me your repo. I'll send you the truth.
           </p>
-          <a href="mailto:kain@humancodereader.com" className="btn-primary mono" style={{ 
-            display: 'inline-block',
-            padding: '1.5rem 3rem', 
-            background: 'var(--color-primary)', 
-            color: '#000',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            textTransform: 'uppercase',
-            textDecoration: 'none'
-          }}>
-            [Contact_Me]
-          </a>
+          <div style={{ marginTop: '2rem' }}>
+            <TerminalForm />
+          </div>
         </div>
       </section>
     </MainLayout>
