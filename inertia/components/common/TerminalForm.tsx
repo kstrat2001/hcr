@@ -7,7 +7,7 @@ export default function TerminalForm() {
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     // Step 0: Repo Validation
@@ -41,11 +41,38 @@ export default function TerminalForm() {
       
       setIsSubmitting(true)
       setError('')
-      // Simulate API call
-      setTimeout(() => {
+      setIsSubmitting(true)
+      setError('')
+      
+      try {
+        // Get CSRF token from cookie
+        const xsrfToken = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('XSRF-TOKEN='))
+          ?.split('=')[1]
+
+        const response = await fetch('/leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': xsrfToken || '',
+          },
+          body: JSON.stringify({
+            repoUrl: repo,
+            email: email
+          })
+        })
+
+        if (response.ok) {
+          setStep(2)
+        } else {
+          setError('Error: Server connection refused. Try again.')
+        }
+      } catch (err) {
+        setError('Error: Transmission failed. Check your connection.')
+      } finally {
         setIsSubmitting(false)
-        setStep(2)
-      }, 1500)
+      }
     }
   }
 
@@ -68,7 +95,7 @@ export default function TerminalForm() {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div className="mono" style={{ fontSize: '0.8rem', color: '#888' }}>lead_capture_v1.exe</div>
+        <div className="mono" style={{ fontSize: '0.8rem', color: '#888' }}>lead_capture_v1.sh</div>
         <div style={{ display: 'flex', gap: '6px' }}>
           <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f56' }}></div>
           <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }}></div>

@@ -10,3 +10,6 @@
 import router from '@adonisjs/core/services/router'
 router.on('/').renderInertia('home')
 
+const LeadsController = () => import('#controllers/leads_controller')
+
+router.post('/leads', [LeadsController, 'store'])

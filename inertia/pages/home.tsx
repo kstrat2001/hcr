@@ -66,7 +66,7 @@ export default function Home() {
               <p style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>
                 You prompted it. It generated. It runs.
                 <br /><br />
-                <span className="text-primary">But is it secure? Is it scalable? Is it actually doing what you think it is?</span>
+                <span className="text-primary">But is it secure? Is it scalable?</span>
               </p>
               <p style={{ color: 'var(--color-text-muted)' }}>
                 LLMs are great at mimicing patterns, but terrible at architectural intent. They don't know your business logic, they just know what code "looks like".
@@ -128,7 +128,7 @@ export default function Home() {
             <h2 className="mono" style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>&gt; Who_Is_Kain?</h2>
             
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.8' }}>
-              It started with a <span className="text-primary">TRS-80</span> when I was 8 years old. I wasn't prompting an LLM; I was fighting memory limits and syntax errors by hand.
+              It started with a <span className="text-primary">TRS-80</span> in the 1990s. I wasn't prompting an LLM; I was fighting memory limits and syntax errors by hand.
             </p>
             
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.8' }}>
