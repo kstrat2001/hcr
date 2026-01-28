@@ -47,7 +47,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
-a {
+/* Force links to respect variables, preventing blue/purple defaults */
+a, a:visited, a:hover, a:active {
   color: var(--color-primary);
   text-decoration: none;
   transition: all 0.2s ease;
