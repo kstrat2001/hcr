@@ -16,7 +16,7 @@ export default function Home() {
               strings={[
                 "Human_Code_Reader",
                 "From_Prompt_To_Prod",
-                "Debugging_Hallucinations",
+                "Refactoring_Slop",
                 "Scaling_Your_Dreams"
               ]}
               typeSpeed={70}

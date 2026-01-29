@@ -143,3 +143,147 @@ a:hover {
   overflow: hidden;
   background: rgba(0, 20, 0, 0.3); /* Darker, more contrast */
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --container-width: 100%;
+    --header-height: auto; 
+  }
+
+  /* Prevent horizontal scroll causing off-center feel */
+  body, html {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+
+  .container {
+    padding: 0 20px;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* HEADER FIXES */
+  header .container {
+    height: auto !important;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    gap: 1rem;
+    align-items: center; /* Ensure true center */
+  }
+  
+  nav.nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* HERO FIXES */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding-top: 2rem !important;
+    height: auto !important;
+    width: 100%;
+  }
+  
+  .hero > div:first-child {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Dynamic font scaling to prevent longer strings from wrapping */
+  .hero h1 {
+    font-size: clamp(0.8rem, 5vw, 1.5rem) !important; 
+    text-align: center;
+    width: 100%;
+    white-space: nowrap; /* Force single line */
+    overflow: visible; /* Let it show */
+    display: block;
+    padding: 0;
+  }
+  
+  .hero p {
+    font-size: 1rem !important;
+    padding: 0 1rem;
+  }
+
+  /* EYE VISUAL FIXES */
+  .eye-visual-container {
+    width: 260px !important; /* Slightly smaller for safety */
+    height: 260px !important;
+    margin: 2rem auto; /* Auto margin for centering */
+  }
+  
+  .eye-visual-container .glitch-text div:first-child {
+    font-size: 4rem !important;
+  }
+
+  /* GRID FIXES */
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    width: 100%;
+  }
+  
+  /* Center feature cards */
+  .features > div {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* BIO SECTION */
+  #bio .items-center {
+    flex-direction: column;
+  }
+  
+  /* CONTACT SECTION */
+  /* Fix huge "Ready_to_Launch?" header */
+  #contact h2 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    word-break: break-all; /* Ensure underscores break if needed */
+    width: 100%;
+  }
+
+  /* TERMINAL FORM FIXES */
+  /* Target the container of the inputs */
+  #contact .mono {
+    padding: 1rem !important; /* Reduce padding */
+  }
+
+  /* Stack Label (> Enter_Repo:) and Input */
+  #contact .mono > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  /* Ensure form takes full width */
+  #contact .mono form {
+    width: 100%;
+    display: block !important; /* Override inline-block */
+  }
+  
+  /* Reset margins for stacked layout */
+  #contact .mono input {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 0.5rem;
+    font-size: 16px !important;
+    background: rgba(255, 255, 255, 0.1) !important; /* Hint at input area */
+    padding: 0.5rem;
+  }
+  
+  /* Allow normal wrapping for text, don't break mid-word */
+  #contact .mono span {
+    word-break: normal;
+    white-space: nowrap; /* Keep label on one line if possible */
+  }
+}
