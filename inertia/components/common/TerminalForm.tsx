@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function TerminalForm() {
   const [step, setStep] = useState(0) // 0: repo, 1: email, 2: success
@@ -6,6 +6,17 @@ export default function TerminalForm() {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  
+  const emailInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (step === 1) {
+      // Small timeout to ensure DOM is ready
+      setTimeout(() => {
+        emailInputRef.current?.focus()
+      }, 10)
+    }
+  }, [step])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -132,7 +143,7 @@ export default function TerminalForm() {
         {/* Step 0: Repo Input */}
         {step >= 0 && (
           <div style={{ marginBottom: step === 0 ? '0' : '1rem' }}>
-            <span className="text-primary">&gt; Enter_Repo_URL:</span>
+            <span className="text-primary" style={{ whiteSpace: 'nowrap' }}>&gt;&nbsp;Enter_Repo_URL:</span>
             {step === 0 ? (
               <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
                 <input
@@ -169,10 +180,11 @@ export default function TerminalForm() {
         {/* Step 1: Email Input */}
         {step >= 1 && step !== 2 && (
           <div style={{ marginBottom: step === 1 ? '0' : '1rem' }}>
-            <span className="text-primary">&gt; Enter_Email:</span>
+            <span className="text-primary" style={{ whiteSpace: 'nowrap' }}>&gt;&nbsp;Enter_Email:</span>
             {step === 1 ? (
               <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
                 <input
+                  ref={emailInputRef}
                   type="email"
                   value={email}
                   onChange={(e) => {
