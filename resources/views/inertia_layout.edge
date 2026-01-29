@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title inertia>Human Code Reader</title>
-  <meta name="description" content="AI writes code. We verify it. Expert manual code review for the AI era.">
+    <title inertia>
+      Human Code Reader
+    </title>
+    <meta
+      name="description"
+      content="AI writes code. We verify it. Expert manual code review for the AI era."
+    />
 
-  <!-- Open Graph / Facebook / WhatsApp -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://humancodereader.com/">
-  <meta property="og:title" content="Human Code Reader | Vibe Check Your Code">
-  <meta property="og:description"
-    content="Don't let your vibes break production. We spot the hallucinations, security holes, and architectural dead-ends in your AI-generated code.">
-  <meta property="og:image" content="https://humancodereader.com/og-image.png">
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://humancodereader.com/" />
+    <meta property="og:title" content="Human Code Reader | Vibe Check Your Code" />
+    <meta
+      property="og:description"
+      content="Don't let your vibes break production. We spot the hallucinations, security holes, and architectural dead-ends in your AI-generated code."
+    />
+    <meta property="og:image" content="https://humancodereader.com/og-image.png" />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://humancodereader.com/">
-  <meta property="twitter:title" content="Human Code Reader | Vibe Check Your Code">
-  <meta property="twitter:description" content="AI writes code. We verify it. Prevent scale-fail at 3AM.">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://humancodereader.com/" />
+    <meta property="twitter:title" content="Human Code Reader | Vibe Check Your Code" />
+    <meta
+      property="twitter:description"
+      content="AI writes code. We verify it. Prevent scale-fail at 3AM."
+    />
 
-  <link rel="canonical" href="https://humancodereader.com/" />
-  <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://humancodereader.com/" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
-  <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=instrument-sans:400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
 
+    @stack('dumper')
+    @viteReactRefresh()
+    @inertiaHead()
+    @vite(['inertia/app/app.tsx', `inertia/pages/${page.component}.tsx`])
+  </head>
 
-
-  @stack('dumper')
-  @viteReactRefresh()
-  @inertiaHead()
-  @vite(['inertia/app/app.tsx', `inertia/pages/${page.component}.tsx`])
-</head>
-
-<body class="min-h-screen w-screen font-sans">
-  @inertia()
-</body>
+  <body class="min-h-screen w-screen font-sans">
+    @inertia()
+  </body>
 
 </html>

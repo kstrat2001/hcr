@@ -13,11 +13,14 @@ export default function MainLayout({ children }: Props) {
 
       {/* Header */}
       <header className="header">
-        <div className="container flex justify-between items-center" style={{ height: 'var(--header-height)' }}>
+        <div
+          className="container flex justify-between items-center"
+          style={{ height: 'var(--header-height)' }}
+        >
           <Link href="/" className="logo mono" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
             &lt;HumanCodeReader /&gt;
           </Link>
-          
+
           <nav className="nav flex gap-4 mono" style={{ fontSize: '0.9rem' }}>
             <Link href="/">[Home]</Link>
             <Link href="#trap">[The_Trap]</Link>
@@ -28,12 +31,12 @@ export default function MainLayout({ children }: Props) {
       </header>
 
       {/* Main Content */}
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
 
       {/* Footer */}
-      <footer style={{ padding: '4rem 0', borderTop: '1px solid var(--glass-border)', marginTop: '4rem' }}>
+      <footer
+        style={{ padding: '4rem 0', borderTop: '1px solid var(--glass-border)', marginTop: '4rem' }}
+      >
         <div className="container text-center text-muted mono" style={{ fontSize: '0.8rem' }}>
           <p>&copy; {new Date().getFullYear()} Human Code Reader. All vibes verified.</p>
         </div>

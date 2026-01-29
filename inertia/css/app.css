@@ -6,21 +6,21 @@
   --color-bg: #050505;
   --color-bg-light: #0a0a0a;
   --color-primary: #00ff41; /* TRS-80 Green */
-  --color-primary-dim: #008F11;
+  --color-primary-dim: #008f11;
   --color-primary-glow: rgba(0, 255, 65, 0.2);
-  --color-secondary: #003B00;
-  
+  --color-secondary: #003b00;
+
   --color-text: #e0e0e0;
   --color-text-muted: #a0a0a0;
   --color-white: #ffffff;
-  
+
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-bg: rgba(255, 255, 255, 0.03);
-  
+
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'Fira Code', monospace;
-  
+
   /* Spacing */
   --container-width: 1200px;
   --header-height: 80px;
@@ -40,7 +40,12 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-sans);
   font-weight: 700;
   color: var(--color-white);
@@ -48,7 +53,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Force links to respect variables, preventing blue/purple defaults */
-a, a:visited, a:hover, a:active {
+a,
+a:visited,
+a:hover,
+a:active {
   color: var(--color-primary);
   text-decoration: none;
   transition: all 0.2s ease;
@@ -69,12 +77,24 @@ a:hover {
 }
 
 /* Utilities */
-.text-primary { color: var(--color-primary); }
-.text-center { text-align: center; }
-.flex { display: flex; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.gap-4 { gap: 1rem; }
+.text-primary {
+  color: var(--color-primary);
+}
+.text-center {
+  text-align: center;
+}
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-4 {
+  gap: 1rem;
+}
 
 /* CRT Scanline Effect Overlay (Optional but cool) */
 .scanline {
@@ -85,10 +105,10 @@ a:hover {
   height: 100vh;
   background: linear-gradient(
     to bottom,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0) 50%,
-    rgba(0,0,0,0.1) 50%,
-    rgba(0,0,0,0.1)
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.1)
   );
   background-size: 100% 4px;
   pointer-events: none;
@@ -97,25 +117,58 @@ a:hover {
 
 /* Eye Scanning Animation */
 @keyframes scan-move {
-  0% { top: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 @keyframes glitch-skew {
-  0% { transform: skew(0deg); }
-  20% { transform: skew(-2deg); }
-  40% { transform: skew(2deg); }
-  60% { transform: skew(-1deg); }
-  80% { transform: skew(1deg); }
-  100% { transform: skew(0deg); }
+  0% {
+    transform: skew(0deg);
+  }
+  20% {
+    transform: skew(-2deg);
+  }
+  40% {
+    transform: skew(2deg);
+  }
+  60% {
+    transform: skew(-1deg);
+  }
+  80% {
+    transform: skew(1deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
 }
 
 @keyframes matrix-pulse {
-  0% { opacity: 0.8; text-shadow: 0 0 5px var(--color-primary); }
-  50% { opacity: 1; text-shadow: 0 0 15px var(--color-primary), 0 0 5px #fff; }
-  100% { opacity: 0.8; text-shadow: 0 0 5px var(--color-primary); }
+  0% {
+    opacity: 0.8;
+    text-shadow: 0 0 5px var(--color-primary);
+  }
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 15px var(--color-primary),
+      0 0 5px #fff;
+  }
+  100% {
+    opacity: 0.8;
+    text-shadow: 0 0 5px var(--color-primary);
+  }
 }
 
 .scan-line {
@@ -148,11 +201,12 @@ a:hover {
 @media (max-width: 768px) {
   :root {
     --container-width: 100%;
-    --header-height: auto; 
+    --header-height: auto;
   }
 
   /* Prevent horizontal scroll causing off-center feel */
-  body, html {
+  body,
+  html {
     overflow-x: hidden;
     width: 100vw;
   }
@@ -163,7 +217,7 @@ a:hover {
     max-width: 100vw;
     overflow-x: hidden;
   }
-  
+
   /* HEADER FIXES */
   header .container {
     height: auto !important;
@@ -173,7 +227,7 @@ a:hover {
     gap: 1rem;
     align-items: center; /* Ensure true center */
   }
-  
+
   nav.nav {
     flex-wrap: wrap;
     justify-content: center;
@@ -190,7 +244,7 @@ a:hover {
     height: auto !important;
     width: 100%;
   }
-  
+
   .hero > div:first-child {
     width: 100%;
     display: flex;
@@ -200,7 +254,7 @@ a:hover {
 
   /* Dynamic font scaling to prevent longer strings from wrapping */
   .hero h1 {
-    font-size: clamp(0.8rem, 5vw, 1.5rem) !important; 
+    font-size: clamp(0.8rem, 5vw, 1.5rem) !important;
     text-align: center;
     width: 100%;
     white-space: nowrap; /* Force single line */
@@ -208,7 +262,7 @@ a:hover {
     display: block;
     padding: 0;
   }
-  
+
   .hero p {
     font-size: 1rem !important;
     padding: 0 1rem;
@@ -220,7 +274,7 @@ a:hover {
     height: 260px !important;
     margin: 2rem auto; /* Auto margin for centering */
   }
-  
+
   .eye-visual-container .glitch-text div:first-child {
     font-size: 4rem !important;
   }
@@ -237,7 +291,7 @@ a:hover {
     margin: 0 auto;
     width: 100%;
   }
-  
+
   /* Feature headers > Security */
   .features h3 {
     white-space: nowrap;
@@ -248,7 +302,7 @@ a:hover {
   #bio .items-center {
     flex-direction: column;
   }
-  
+
   /* Fix "> Who_Is_Kain?" wrapping */
   #bio h2 {
     white-space: nowrap;
@@ -256,9 +310,9 @@ a:hover {
     width: 100%;
     text-align: center;
   }
-  
+
   /* CONTACT SECTION */
-  
+
   /* CONTACT SECTION */
   /* Fix huge "Ready_to_Launch?" header */
   #contact h2 {
@@ -280,13 +334,13 @@ a:hover {
     align-items: flex-start;
     width: 100%;
   }
-  
+
   /* Ensure form takes full width */
   #contact .mono form {
     width: 100%;
     display: block !important; /* Override inline-block */
   }
-  
+
   /* Reset margins for stacked layout */
   #contact .mono input {
     width: 100% !important;
@@ -296,7 +350,7 @@ a:hover {
     background: rgba(255, 255, 255, 0.1) !important; /* Hint at input area */
     padding: 0.5rem;
   }
-  
+
   /* Allow normal wrapping for text, don't break mid-word */
   #contact .mono span {
     word-break: normal;

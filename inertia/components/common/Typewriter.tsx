@@ -9,13 +9,13 @@ interface TypewriterProps {
   style?: React.CSSProperties
 }
 
-export default function Typewriter({ 
-  strings, 
-  typeSpeed = 100, 
-  backSpeed = 50, 
+export default function Typewriter({
+  strings,
+  typeSpeed = 100,
+  backSpeed = 50,
   loop = true,
-  className = "",
-  style = {}
+  className = '',
+  style = {},
 }: TypewriterProps) {
   const [text, setText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -27,9 +27,8 @@ export default function Typewriter({
       const i = loopNum % strings.length
       const fullText = strings[i]
 
-      setText(isDeleting 
-        ? fullText.substring(0, text.length - 1) 
-        : fullText.substring(0, text.length + 1)
+      setText(
+        isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1)
       )
 
       setTypingSpeed(isDeleting ? backSpeed : typeSpeed)
@@ -47,7 +46,10 @@ export default function Typewriter({
   }, [text, isDeleting, loopNum, strings, typeSpeed, backSpeed])
 
   return (
-    <span className={className} style={{ borderRight: '0.1em solid var(--color-primary)', ...style }}>
+    <span
+      className={className}
+      style={{ borderRight: '0.1em solid var(--color-primary)', ...style }}
+    >
       {text}
     </span>
   )
