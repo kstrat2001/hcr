@@ -231,17 +231,33 @@ a:hover {
     gap: 2rem !important;
     width: 100%;
   }
-  
+
   /* Center feature cards */
   .features > div {
     margin: 0 auto;
     width: 100%;
+  }
+  
+  /* Feature headers > Security */
+  .features h3 {
+    white-space: nowrap;
+    font-size: clamp(1.1rem, 5vw, 1.5rem) !important;
   }
 
   /* BIO SECTION */
   #bio .items-center {
     flex-direction: column;
   }
+  
+  /* Fix "> Who_Is_Kain?" wrapping */
+  #bio h2 {
+    white-space: nowrap;
+    font-size: clamp(1.5rem, 7vw, 2.5rem) !important;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* CONTACT SECTION */
   
   /* CONTACT SECTION */
   /* Fix huge "Ready_to_Launch?" header */

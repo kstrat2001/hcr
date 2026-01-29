@@ -2,6 +2,7 @@ import { Head } from '@inertiajs/react'
 import MainLayout from '../components/layout/MainLayout'
 import Typewriter from '../components/common/Typewriter'
 import TerminalForm from '../components/common/TerminalForm'
+import ScanningVisual from '../components/common/ScanningVisual'
 
 export default function Home() {
   return (
@@ -38,23 +39,9 @@ export default function Home() {
             [Get_Verified]
           </a>
         </div>
-        <div className="hero-visual eye-visual-container" style={{ 
-          width: '400px', 
-          height: '400px', 
-          border: '1px solid var(--color-primary)',
-          boxShadow: '0 0 20px var(--color-primary-glow)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          {/* Scanning Line */}
-          <div className="scan-line"></div>
-          
-          <div className="mono text-center glitch-text" style={{ color: 'var(--color-primary)' }}>
-            <div style={{ fontSize: '6rem', marginBottom: '1rem', lineHeight: 1 }}>👁️</div>
-            <div style={{ letterSpacing: '4px', fontWeight: 'bold' }}>SCANNING...</div>
-          </div>
-        </div>
+        
+        {/* NEW VISUAL: The X-Ray Scanner */}
+        <ScanningVisual />
       </section>
 
       {/* The Trap */}
