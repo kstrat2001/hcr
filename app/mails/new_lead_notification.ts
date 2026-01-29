@@ -1,5 +1,6 @@
 import { BaseMail } from '@adonisjs/mail'
 import Lead from '#models/lead'
+import env from '#start/env'
 
 export default class NewLeadNotification extends BaseMail {
   from = 'system@humancodereader.com'
@@ -15,7 +16,7 @@ export default class NewLeadNotification extends BaseMail {
    */
   prepare() {
     this.message
-      .to('kain@darkbook.local') // Replace with your real email in Production
+      .to(env.get('NOTIFICATION_EMAIL'))
       .subject(`HCR Lead: ${this.lead.repoUrl}`)
       .htmlView('emails/new_lead', { lead: this.lead })
   }
