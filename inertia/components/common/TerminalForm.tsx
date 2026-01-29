@@ -120,8 +120,7 @@ export default function TerminalForm() {
             {step === 0 ? (
               <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
                 <input 
-                  type="text" 
-                  autoFocus
+                  type="text"
                   value={repo}
                   onChange={(e) => {
                     setRepo(e.target.value)
@@ -154,8 +153,7 @@ export default function TerminalForm() {
             {step === 1 ? (
               <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
                 <input 
-                  type="email" 
-                  autoFocus
+                  type="email"
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value)
