@@ -32,6 +32,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -64,6 +68,29 @@ a:active {
 
 a:hover {
   text-shadow: 0 0 8px var(--color-primary-glow);
+}
+
+/* Nav Links - Terminal Block Effect */
+nav a {
+  padding: 0.2rem 0.5rem; /* Give them some hit area */
+}
+
+nav a:hover {
+  background-color: var(--color-primary);
+  color: #000 !important; /* Force black text on green bg */
+  text-decoration: none;
+  box-shadow: 0 0 10px var(--color-primary);
+  text-shadow: none;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5, 5, 5, 0.8); /* Semi-transparent black */
+  backdrop-filter: blur(10px);    /* Glass effect */
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
 }
 
 .mono {
@@ -116,6 +143,24 @@ a:hover {
 }
 
 /* Eye Scanning Animation */
+.btn-primary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary);
+  color: #000 !important;
+  box-shadow: 0 0 15px var(--color-primary);
+  text-decoration: none;
+}
+
 @keyframes scan-move {
   0% {
     top: 0%;

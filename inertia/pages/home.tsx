@@ -47,15 +47,6 @@ export default function Home() {
           <a
             href="#contact"
             className="btn-primary mono"
-            style={{
-              display: 'inline-block',
-              padding: '1rem 2rem',
-              border: '2px solid var(--color-primary)',
-              color: 'var(--color-primary)',
-              fontSize: '1.2rem',
-              fontWeight: 'bold',
-              textTransform: 'uppercase',
-            }}
           >
             [Get_Verified]
           </a>
@@ -273,9 +264,9 @@ export default function Home() {
                 <div>
                   <span className="text-primary">$ check_skills</span>
                   <br />
-                  &gt; C++, OpenGL, iOS, Embedded Systems
+                  &gt; Typescript, Swift, Java, C++, Python, etc 
                   <br />
-                  &gt; Engineering Leadership, Architecture
+                  &gt; Engineering Management, Software Architecture
                   <br />
                   &gt; <span className="text-primary">Vibe_Verification_Status: APPROVED</span>
                 </div>
