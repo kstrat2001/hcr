@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+        }
+
+        .card {
+            border: 1px solid #333;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #fff;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .label {
+            color: #888;
+        }
+
+        .value {
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        a {
+            color: #00ff41;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>> New_Lead_Captured</h1>
+
+        <p>
+            <span class="label">Email:</span><br />
+            <span class="value">{{ lead.email }}</span>
+        </p>
+
+        <p>
+            <span class="label">Repo:</span><br />
+            <span class="value">
+                <a href="{{ lead.repoUrl }}">{{ lead.repoUrl }}</a>
+            </span>
+        </p>
+
+        <p>
+            <span class="label">Timestamp:</span><br />
+            <span class="value">{{ lead.createdAt.toFormat('yyyy-MM-dd HH:mm:ss') }}</span>
+        </p>
+
+        <hr style="border-color: #333" />
+        <p style="color: #666; font-size: 0.8em;">
+            // Automated message from HCR System
+        </p>
+    </div>
+</body>
+
+</html>
