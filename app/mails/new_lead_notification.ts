@@ -6,7 +6,7 @@ export default class NewLeadNotification extends BaseMail {
   from = 'system@humancodereader.com'
   subject = 'New Lead Detected'
 
-  constructor(private lead: Lead) {
+  constructor(private lead: Lead, private model?: string) {
     super()
   }
 
@@ -16,8 +16,10 @@ export default class NewLeadNotification extends BaseMail {
    */
   prepare() {
     this.message
+    const subjectId = this.lead.repoUrl === 'NOT_PROVIDED' ? this.lead.email : this.lead.repoUrl
+    this.message
       .to(env.get('NOTIFICATION_EMAIL'))
-      .subject(`HCR Lead: ${this.lead.repoUrl}`)
-      .htmlView('emails/new_lead', { lead: this.lead })
+      .subject(`HCR Lead: ${subjectId}`)
+      .htmlView('emails/new_lead', { lead: this.lead, model: this.model })
   }
 }

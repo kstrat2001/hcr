@@ -5,15 +5,18 @@ import NewLeadNotification from '#mails/new_lead_notification'
 
 export default class LeadsController {
   async store({ request, response }: HttpContext) {
-    const data = request.only(['repoUrl', 'email'])
+    const { repoUrl, email, model } = request.only(['repoUrl', 'email', 'model'])
 
     // In a real app, use a validator here!
+    
+    // Handle optional repoUrl (DB requires NOT NULL)
+    const finalRepoUrl = repoUrl && repoUrl.trim() !== '' ? repoUrl : 'NOT_PROVIDED'
 
-    const lead = await Lead.create(data)
+    const lead = await Lead.create({ repoUrl: finalRepoUrl, email })
 
     // Attempt to send email, but don't block response on failure
     try {
-      await mail.send(new NewLeadNotification(lead))
+      await mail.send(new NewLeadNotification(lead, model))
     } catch (error) {
       console.error('Failed to send lead email:', error)
     }

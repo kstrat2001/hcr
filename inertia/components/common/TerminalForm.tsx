@@ -4,12 +4,34 @@ export default function TerminalForm() {
   const [step, setStep] = useState(0) // 0: repo, 1: email, 2: success
   const [repo, setRepo] = useState('')
   const [email, setEmail] = useState('')
+  const [model, setModel] = useState('')
+  const [modelColor, setModelColor] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   
   const emailInputRef = useRef<HTMLInputElement>(null)
+  const repoInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    // Check for 'plan' and 'color' in URL
+    const params = new URLSearchParams(window.location.search)
+    const plan = params.get('plan')
+    const color = params.get('color')
+    
+    if (plan) {
+      setModel(plan)
+    }
+    if (color) {
+      setModelColor(color)
+    }
+
+    // Auto-focus Repo input on mount (Step 0)
+    if (step === 0) {
+      setTimeout(() => {
+        repoInputRef.current?.focus()
+      }, 10)
+    }
+
     if (step === 1) {
       // Small timeout to ensure DOM is ready
       setTimeout(() => {
@@ -23,15 +45,13 @@ export default function TerminalForm() {
 
     // Step 0: Repo Validation
     if (step === 0) {
-      if (!repo) {
-        setError('Error: Repo URL is required.')
-        return
-      }
-
-      const urlPattern = /^(https?:\/\/)?([\w\d]+\.)?[\w\d]+\.[\w\d]+(\/.*)?$/
-      if (!urlPattern.test(repo)) {
-        setError("Error: That doesn't look like a repo. 404 Vibe Not Found.")
-        return
+      // Optional: If empty, proceed.
+      if (repo && repo.trim() !== '') {
+         const urlPattern = /^(https?:\/\/)?([\w\d]+\.)?[\w\d]+\.[\w\d]+(\/.*)?$/
+         if (!urlPattern.test(repo)) {
+           setError("Error: That doesn't look like a repo. 404 Vibe Not Found.")
+           return
+         }
       }
 
       setStep(1)
@@ -52,8 +72,6 @@ export default function TerminalForm() {
 
       setIsSubmitting(true)
       setError('')
-      setIsSubmitting(true)
-      setError('')
 
       try {
         // Get CSRF token from cookie
@@ -71,6 +89,7 @@ export default function TerminalForm() {
           body: JSON.stringify({
             repoUrl: repo,
             email: email,
+            model: model, 
           }),
         })
 
@@ -111,7 +130,7 @@ export default function TerminalForm() {
         }}
       >
         <div className="mono" style={{ fontSize: '0.8rem', color: '#888' }}>
-          lead_capture_v1.sh
+          lead_capture_v1.sh {model && `[--model=${model}]`}
         </div>
         <div style={{ display: 'flex', gap: '6px' }}>
           <div
@@ -136,6 +155,15 @@ export default function TerminalForm() {
           &gt; initiating handshake...
           <br />
           &gt; connection established.
+          {model && (
+            <>
+              <br />
+            <>
+              <br />
+              <span style={{ color: modelColor || 'var(--color-primary)' }}>&gt; target model detected: {model}</span>
+            </>
+            </>
+          )}
           <br />
           &gt; ready for input.
         </div>
@@ -147,6 +175,7 @@ export default function TerminalForm() {
             {step === 0 ? (
               <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
                 <input
+                  ref={repoInputRef}
                   type="text"
                   value={repo}
                   onChange={(e) => {
@@ -163,11 +192,11 @@ export default function TerminalForm() {
                     outline: 'none',
                     width: '80%',
                   }}
-                  placeholder="github.com/user/project..."
+                  placeholder="(Optional) github.com/user/project..."
                 />
               </form>
             ) : (
-              <span style={{ color: '#fff', marginLeft: '0.5rem' }}>{repo}</span>
+              <span style={{ color: '#fff', marginLeft: '0.5rem' }}>{repo || '[SKIPPED]'}</span>
             )}
             {step === 0 && error && (
               <div style={{ color: '#ff4141', marginTop: '0.5rem', marginLeft: '1rem' }}>

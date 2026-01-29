@@ -23,9 +23,10 @@ export default function MainLayout({ children }: Props) {
 
           <nav className="nav flex gap-4 mono" style={{ fontSize: '0.9rem' }}>
             <Link href="/">[Home]</Link>
-            <a href="#trap">[The_Trap]</a>
-            <a href="#solution">[Solution]</a>
-            <a href="#bio">[Who_Am_I]</a>
+            <a href="/#trap">[The_Trap]</a>
+            <a href="/#solution">[Solution]</a>
+            <a href="/#bio">[Who_Am_I]</a>
+            <Link href="/pricing">[Models]</Link>
           </nav>
         </div>
       </header>

@@ -283,7 +283,7 @@ export default function Home() {
             Ready_to_Launch?
           </h2>
           <p style={{ fontSize: '1.2rem', marginBottom: '3rem' }}>
-            Send me your repo. I'll send you the truth.
+            Show me the code. I'll give you the truth.
           </p>
           <div style={{ marginTop: '2rem' }}>
             <TerminalForm />
