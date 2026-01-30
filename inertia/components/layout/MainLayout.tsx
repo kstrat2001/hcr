@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { Link, Head } from '@inertiajs/react'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -8,6 +8,12 @@ interface Props {
 export default function MainLayout({ children }: Props) {
   return (
     <div className="layout">
+      <Head>
+        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:site_name" content="Human Code Reader" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="/og-image.png" />
+      </Head>
       {/* Scanline Effect */}
       <div className="scanline"></div>
 

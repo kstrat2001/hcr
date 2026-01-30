@@ -39,7 +39,7 @@ export default function Pricing() {
     {
       id: '003',
       name: 'FRACTIONAL_CTO',
-      price: '$4,000',
+      price: '$5,000',
       unit: 'per month',
       desc: 'Ongoing protection against architectural entropy.',
       features: [
