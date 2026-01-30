@@ -286,7 +286,7 @@ export default function Home() {
             Show me the code. I'll give you the truth.
           </p>
           <div style={{ marginTop: '2rem' }}>
-            <TerminalForm />
+            <TerminalForm autoFocusOnMount={false} />
           </div>
         </div>
       </section>

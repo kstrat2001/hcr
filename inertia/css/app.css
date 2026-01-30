@@ -103,6 +103,40 @@ nav a:hover {
   padding: 0 20px;
 }
 
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.terminal-window {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .terminal-window {
+    width: 70%;
+  }
+}
+
+/* Responsive Labels */
+.label-desktop {
+  display: none;
+}
+.label-mobile {
+  display: inline;
+}
+
+@media (min-width: 768px) {
+  .label-desktop {
+    display: inline;
+  }
+  .label-mobile {
+    display: none;
+  }
+}
+
 /* Utilities */
 .text-primary {
   color: var(--color-primary);

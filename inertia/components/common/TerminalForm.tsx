@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 
-export default function TerminalForm() {
+interface Props {
+  autoFocusOnMount?: boolean
+}
+
+export default function TerminalForm({ autoFocusOnMount = true }: Props) {
   const [step, setStep] = useState(0) // 0: repo, 1: email, 2: success
   const [repo, setRepo] = useState('')
   const [email, setEmail] = useState('')
@@ -26,7 +30,7 @@ export default function TerminalForm() {
     }
 
     // Auto-focus Repo input on mount (Step 0)
-    if (step === 0) {
+    if (step === 0 && autoFocusOnMount) {
       setTimeout(() => {
         repoInputRef.current?.focus()
       }, 10)
@@ -102,8 +106,8 @@ export default function TerminalForm() {
 
   return (
     <div
+      className="terminal-window"
       style={{
-        maxWidth: '800px',
         margin: '0 auto',
         background: '#000',
         border: '1px solid #333',
@@ -164,10 +168,14 @@ export default function TerminalForm() {
 
         {/* Step 0: Repo/Project Input */}
         {step >= 0 && (
-          <div style={{ marginBottom: step === 0 ? '0' : '1rem' }}>
-            <span className="text-primary" style={{ whiteSpace: 'nowrap' }}>&gt;&nbsp;Enter_Project_or_Repo:</span>
+          <div style={{ marginBottom: step === 0 ? '0' : '1rem', display: 'flex', alignItems: 'center' }}>
+            <span className="text-primary" style={{ whiteSpace: 'nowrap', marginRight: '0.5rem' }}>
+              &gt;&nbsp;
+              <span className="label-desktop">Enter_Project_or_Repo:</span>
+              <span className="label-mobile">Project:</span>
+            </span>
             {step === 0 ? (
-              <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
+              <form onSubmit={handleSubmit} style={{ flex: 1 }} noValidate>
                 <input
                   ref={repoInputRef}
                   type="text"
@@ -182,18 +190,17 @@ export default function TerminalForm() {
                     color: '#fff',
                     fontFamily: 'inherit',
                     fontSize: 'inherit',
-                    marginLeft: '0.5rem',
                     outline: 'none',
-                    width: '80%',
+                    width: '100%',
                   }}
                   placeholder="(Optional) Project Name or URL..."
                 />
               </form>
             ) : (
-              <span style={{ color: '#fff', marginLeft: '0.5rem' }}>{repo || '[SKIPPED]'}</span>
+              <span style={{ color: '#fff' }}>{repo || '[SKIPPED]'}</span>
             )}
             {step === 0 && error && (
-              <div style={{ color: '#ff4141', marginTop: '0.5rem', marginLeft: '1rem' }}>
+              <div style={{ color: '#ff4141', marginLeft: '1rem', whiteSpace: 'nowrap' }}>
                 &gt; {error}
               </div>
             )}
@@ -202,10 +209,10 @@ export default function TerminalForm() {
 
         {/* Step 1: Email Input */}
         {step >= 1 && step !== 2 && (
-          <div style={{ marginBottom: step === 1 ? '0' : '1rem' }}>
-            <span className="text-primary" style={{ whiteSpace: 'nowrap' }}>&gt;&nbsp;Enter_Email:</span>
+          <div style={{ marginBottom: step === 1 ? '0' : '1rem', display: 'flex', alignItems: 'center' }}>
+            <span className="text-primary" style={{ whiteSpace: 'nowrap', marginRight: '0.5rem' }}>&gt;&nbsp;Enter_Email:</span>
             {step === 1 ? (
-              <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
+              <form onSubmit={handleSubmit} style={{ flex: 1 }} noValidate>
                 <input
                   ref={emailInputRef}
                   type="email"
@@ -221,18 +228,17 @@ export default function TerminalForm() {
                     color: '#fff',
                     fontFamily: 'inherit',
                     fontSize: 'inherit',
-                    marginLeft: '0.5rem',
                     outline: 'none',
-                    width: '80%',
+                    width: '100%',
                   }}
                   placeholder="you@company.com"
                 />
               </form>
             ) : (
-              <span style={{ color: '#fff', marginLeft: '0.5rem' }}>{email}</span>
+              <span style={{ color: '#fff' }}>{email}</span>
             )}
             {error && (
-              <div style={{ color: '#ff4141', marginTop: '0.5rem', marginLeft: '1rem' }}>
+              <div style={{ color: '#ff4141', marginLeft: '1rem', whiteSpace: 'nowrap' }}>
                 &gt; {error}
               </div>
             )}

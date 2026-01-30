@@ -6,7 +6,7 @@ export default function Terminal() {
   return (
     <MainLayout>
       <Head title="Lead Capture Terminal" />
-      <section className="container" style={{ padding: '8rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <section className="container-wide" style={{ padding: '8rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <h1 className="mono text-primary text-center" style={{ marginBottom: '2rem', fontSize: '2rem' }}>
           &gt; Secure_Uplink
         </h1>

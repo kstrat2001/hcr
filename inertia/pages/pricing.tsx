@@ -60,7 +60,7 @@ export default function Pricing() {
 
       <section className="container" style={{ padding: '4rem 0 8rem' }}>
         <div className="text-center" style={{ marginBottom: '5rem' }}>
-          <h1 className="mono text-primary" style={{ fontSize: '3rem', marginBottom: '1rem' }}>
+          <h1 className="mono text-primary" style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', marginBottom: '1rem', whiteSpace: 'nowrap' }}>
             &gt; Human_Models
           </h1>
           <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', maxWidth: '600px', margin: '0 auto' }}>
@@ -141,7 +141,7 @@ export default function Pricing() {
               </ul>
 
               <a
-                href={`/?plan=${p.name}&color=${encodeURIComponent(p.color)}#contact`}
+                href={`/terminal?plan=${p.name}&color=${encodeURIComponent(p.color)}`}
                 className="mono text-center"
                 style={{
                   display: 'block',
@@ -206,7 +206,7 @@ export default function Pricing() {
                     
                     <div className="text-right">
                         <div className="mono" style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#fff', marginBottom: '1rem' }}>$0</div>
-                        <a href="/?plan=PROOF#contact" className="btn-primary mono" style={{ fontSize: '1rem', padding: '0.75rem 1.5rem' }}>
+                        <a href="/terminal?plan=PROOF_OF_WORK&color=%23ffffff" className="btn-primary mono" style={{ fontSize: '1rem', padding: '0.75rem 1.5rem' }}>
                             [Run_Test]
                         </a>
                     </div>
