@@ -43,17 +43,11 @@ export default function TerminalForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Step 0: Repo Validation
+    // Step 0: Repo/Project Validation
     if (step === 0) {
       // Optional: If empty, proceed.
-      if (repo && repo.trim() !== '') {
-         const urlPattern = /^(https?:\/\/)?([\w\d]+\.)?[\w\d]+\.[\w\d]+(\/.*)?$/
-         if (!urlPattern.test(repo)) {
-           setError("Error: That doesn't look like a repo. 404 Vibe Not Found.")
-           return
-         }
-      }
-
+      // If not empty, we accept it as is (Project Name OR URL)
+      
       setStep(1)
       setError('')
     }
@@ -168,10 +162,10 @@ export default function TerminalForm() {
           &gt; ready for input.
         </div>
 
-        {/* Step 0: Repo Input */}
+        {/* Step 0: Repo/Project Input */}
         {step >= 0 && (
           <div style={{ marginBottom: step === 0 ? '0' : '1rem' }}>
-            <span className="text-primary" style={{ whiteSpace: 'nowrap' }}>&gt;&nbsp;Enter_Repo_URL:</span>
+            <span className="text-primary" style={{ whiteSpace: 'nowrap' }}>&gt;&nbsp;Enter_Project_or_Repo:</span>
             {step === 0 ? (
               <form onSubmit={handleSubmit} style={{ display: 'inline' }} noValidate>
                 <input
@@ -192,7 +186,7 @@ export default function TerminalForm() {
                     outline: 'none',
                     width: '80%',
                   }}
-                  placeholder="(Optional) github.com/user/project..."
+                  placeholder="(Optional) Project Name or URL..."
                 />
               </form>
             ) : (

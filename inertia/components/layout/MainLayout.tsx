@@ -40,6 +40,7 @@ export default function MainLayout({ children }: Props) {
       >
         <div className="container text-center text-muted mono" style={{ fontSize: '0.8rem' }}>
           <p>&copy; {new Date().getFullYear()} Human Code Reader. All vibes verified.</p>
+          <p style={{ marginTop: '0.5rem', opacity: 0.5 }}>By submitting data, you agree to our Privacy Protocol.</p>
         </div>
       </footer>
     </div>

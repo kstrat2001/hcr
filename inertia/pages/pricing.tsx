@@ -26,10 +26,11 @@ export default function Pricing() {
       desc: 'Full security & logic analysis before launch.',
       features: [
         'Deep code review + testing',
-        'Security Vulnerability Scan',
-        'Database Schema Optimization',
-        'Performance Profiling',
-        'Comprehensive PDF Report',
+        'Security Check',
+        'Compliance Check',
+        'Database Schema Check',
+        'Performance Check',
+        'Comprehensive Report',
       ],
       cta: '[Start_Audit]',
       color: '#00ff41', // Primary Green
@@ -42,7 +43,7 @@ export default function Pricing() {
       unit: 'per month',
       desc: 'Ongoing protection against architectural entropy.',
       features: [
-        'Monthly Red/Yellow/Green Report',
+        'Monthly Reporting',
         'Monthly Architecture Review',
         'Monthly Security Checkup',
         'Dev Team Mentorship',
