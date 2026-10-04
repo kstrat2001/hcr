@@ -27,7 +27,6 @@ export default function Pricing() {
         'Unit and end-to-end test frameworks set up for your codebase',
         'Evals for your AI features, so you can tell when a prompt or model change makes things worse',
         'Test runs wired into your workflow, so regressions get caught before deploy',
-        'Handoff docs so your team, or your AI tools, can keep the tests current',
       ],
       cta: '[Scope_Evals_and_Tests]',
       color: '#00ff41', // Primary Green
