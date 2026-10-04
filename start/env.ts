@@ -46,4 +46,5 @@ export default await Env.create(new URL('../', import.meta.url), {
   SMTP_USERNAME: Env.schema.string(),
   SMTP_PASSWORD: Env.schema.string.optional(),
   NOTIFICATION_EMAIL: Env.schema.string(),
+  MAIL_FROM: Env.schema.string({ format: 'email' }),
 })
