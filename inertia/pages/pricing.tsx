@@ -53,7 +53,7 @@ export default function Pricing() {
     <MainLayout>
       <Head title="Human Models" />
 
-      <section className="container" style={{ padding: '4rem 0 8rem' }}>
+      <section className="container" style={{ padding: '4rem 0 2rem' }}>
         <div className="text-center" style={{ marginBottom: '4rem' }}>
           <h1
             className="mono text-primary"

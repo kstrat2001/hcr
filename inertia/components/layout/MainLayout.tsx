@@ -42,7 +42,7 @@ export default function MainLayout({ children }: Props) {
 
       {/* Footer */}
       <footer
-        style={{ padding: '4rem 0', borderTop: '1px solid var(--glass-border)', marginTop: '4rem' }}
+        style={{ padding: '3rem 0', borderTop: '1px solid var(--glass-border)', marginTop: '2rem' }}
       >
         <div className="container text-center text-muted mono" style={{ fontSize: '0.8rem' }}>
           <a
