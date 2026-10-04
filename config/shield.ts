@@ -15,10 +15,16 @@ const shieldConfig = defineConfig({
    * Configure CSRF protection options. Refer documentation
    * to learn more
    */
+  /**
+   * Off: there is nothing to submit (no forms, no POST routes), and CSRF
+   * protection needs a session plus the XSRF-TOKEN cookie. If a form ever
+   * comes back, re-enable this together with the session middleware in
+   * start/kernel.ts.
+   */
   csrf: {
-    enabled: true,
+    enabled: false,
     exceptRoutes: [],
-    enableXsrfCookie: true,
+    enableXsrfCookie: false,
     methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
   },
 

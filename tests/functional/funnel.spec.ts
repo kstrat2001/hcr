@@ -46,6 +46,13 @@ test.group('Funnel to Darkly Energized', () => {
     assert.notInclude(await res.text(), 'Data received')
   })
 
+  for (const path of ['/', '/pricing', '/terminal']) {
+    test(`${path} sets no cookies`, async ({ assert }) => {
+      const res = await get(path)
+      assert.deepEqual(res.headers.getSetCookie(), [])
+    })
+  }
+
   test('the page says whose product it is', async ({ assert }) => {
     const res = await get('/')
     const html = await res.text()

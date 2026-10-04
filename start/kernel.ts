@@ -34,9 +34,16 @@ server.use([
  * The router middleware stack runs middleware on all the HTTP
  * requests with a registered route.
  */
+/**
+ * No session middleware: HCR collects nothing and has no forms or sign-in,
+ * so it sets no cookies. The session middleware was what wrote
+ * `adonis-session` (the session id) and the encrypted cookie named after
+ * that id (the cookie store's session data, which held the CSRF secret).
+ * The session provider and config/session.ts stay registered because
+ * config/auth.ts still defines a session guard; nothing uses it.
+ */
 router.use([
   () => import('@adonisjs/core/bodyparser_middleware'),
-  () => import('@adonisjs/session/session_middleware'),
   () => import('@adonisjs/shield/shield_middleware'),
   () => import('@adonisjs/auth/initialize_auth_middleware'),
 ])

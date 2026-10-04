@@ -45,7 +45,7 @@ export default function Home() {
             .
           </p>
           <a href={startProjectUrl('home_cta', 'hero')} className="btn-primary mono">
-            [Get_Verified]
+            [Get_Reviewed]
           </a>
         </div>
 

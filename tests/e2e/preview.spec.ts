@@ -85,7 +85,7 @@ test('home', async ({ page, problems }) => {
   expect(res?.status()).toBe(200)
   await expect(page.getByRole('heading', { name: 'The_AI_Trap' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Ready_to_Launch?' })).toBeVisible()
-  await expect(page.getByRole('link', { name: '[Get_Verified]' })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: '[Get_Reviewed]' })).toHaveAttribute(
     'href',
     `${DE_START}home_cta&utm_content=hero`
   )
@@ -127,4 +127,28 @@ test('/terminal redirects to Darkly Energized "Start a project"', async ({ page,
   expect(new URL(page.url()).hostname).toBe('darklyenergized.com')
   expect(problems).toEqual([])
   await holdOpen(page)
+})
+
+test('sets no cookies on any page or the /terminal redirect', async ({
+  page,
+  context,
+  baseURL,
+  problems,
+}) => {
+  const setCookie: string[] = []
+  page.on('response', async (res) => {
+    if (!res.url().startsWith(baseURL!)) return
+    for (const value of await res.headerValues('set-cookie')) {
+      setCookie.push(`${new URL(res.url()).pathname}: ${value.split('=')[0]}`)
+    }
+  })
+
+  for (const path of ['/', '/pricing', '/terminal']) {
+    await page.goto(path)
+  }
+
+  expect(setCookie, 'Set-Cookie headers from HCR').toEqual([])
+  // Scoped to HCR: in preview, darklyenergized.com may set its own.
+  expect(await context.cookies(baseURL!)).toEqual([])
+  expect(problems).toEqual([])
 })
