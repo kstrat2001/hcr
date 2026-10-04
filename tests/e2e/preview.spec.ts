@@ -74,9 +74,10 @@ async function checkFooter(page: Page) {
   ]) {
     await expect(footer.getByRole('link', { name, exact: true })).toHaveAttribute('href', href)
   }
-  await expect(footer.getByRole('link', { name: '[Start_Project]' })).toHaveAttribute(
+  await expect(footer.getByRole('link', { name: '[Models]' })).toHaveAttribute('href', '/pricing')
+  await expect(page.locator('header nav').getByRole('link', { name: '[Models]' })).toHaveAttribute(
     'href',
-    `${DE_START}footer`
+    '/pricing'
   )
 }
 
@@ -87,8 +88,13 @@ test('home', async ({ page, problems }) => {
   await expect(page.getByRole('heading', { name: 'Ready_to_Launch?' })).toBeVisible()
   await expect(page.getByRole('link', { name: '[Get_Reviewed]' })).toHaveAttribute(
     'href',
-    `${DE_START}home_cta&utm_content=hero`
+    '/pricing'
   )
+  await expect(page.getByRole('link', { name: '[View_Models]' })).toHaveAttribute(
+    'href',
+    '/pricing'
+  )
+  await expect(page.locator('header, footer').locator('a[href*="projects/new"]')).toHaveCount(0)
   await expect(page.locator('form, input, textarea')).toHaveCount(0)
   await checkFooter(page)
   expect(problems).toEqual([])
