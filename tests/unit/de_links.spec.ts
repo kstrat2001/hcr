@@ -11,8 +11,8 @@ test.group('Darkly Energized links', () => {
 
   test('a tier is carried as utm_content', ({ assert }) => {
     assert.equal(
-      startProjectUrl('pricing', 'deep_audit'),
-      'https://darklyenergized.com/projects/new?utm_source=hcr&utm_medium=referral&utm_campaign=pricing&utm_content=deep_audit'
+      startProjectUrl('pricing', 'evals_tests'),
+      'https://darklyenergized.com/projects/new?utm_source=hcr&utm_medium=referral&utm_campaign=pricing&utm_content=evals_tests'
     )
   })
 
