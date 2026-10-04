@@ -15,10 +15,15 @@ const shieldConfig = defineConfig({
    * Configure CSRF protection options. Refer documentation
    * to learn more
    */
+  /**
+   * Off: there is nothing to submit (no forms, no POST routes). CSRF
+   * protection needs @adonisjs/session and the XSRF-TOKEN cookie; if a form
+   * ever comes back, add the session package back and re-enable this.
+   */
   csrf: {
-    enabled: true,
+    enabled: false,
     exceptRoutes: [],
-    enableXsrfCookie: true,
+    enableXsrfCookie: false,
     methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
   },
 

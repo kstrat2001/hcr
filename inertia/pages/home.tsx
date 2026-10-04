@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 import MainLayout from '../components/layout/MainLayout'
 import Typewriter from '../components/common/Typewriter'
-import TerminalForm from '../components/common/TerminalForm'
+import { startProjectUrl } from '../lib/de_links'
 import ScanningVisual from '../components/common/ScanningVisual'
 
 export default function Home() {
@@ -44,11 +44,8 @@ export default function Home() {
             </span>
             .
           </p>
-          <a
-            href="#contact"
-            className="btn-primary mono"
-          >
-            [Get_Verified]
+          <a href={startProjectUrl('home_cta', 'hero')} className="btn-primary mono">
+            [Get_Reviewed]
           </a>
         </div>
 
@@ -285,9 +282,16 @@ export default function Home() {
           <p style={{ fontSize: '1.2rem', marginBottom: '3rem' }}>
             Show me the code. I'll give you the truth.
           </p>
-          <div style={{ marginTop: '2rem' }}>
-            <TerminalForm autoFocusOnMount={false} />
-          </div>
+          <p style={{ color: 'var(--color-text-muted)', marginBottom: '2.5rem' }}>
+            Human Code Reader reviews are run by Darkly Energized. Tell us about your project and
+            we'll scope it.
+          </p>
+          <a href={startProjectUrl('home_cta', 'contact')} className="btn-primary mono">
+            [Start_a_Project]
+          </a>
+          <p className="mono" style={{ marginTop: '1.5rem', fontSize: '0.9rem' }}>
+            <a href="/pricing">[Compare_Models]</a>
+          </p>
         </div>
       </section>
     </MainLayout>

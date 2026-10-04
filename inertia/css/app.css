@@ -103,40 +103,6 @@ nav a:hover {
   padding: 0 20px;
 }
 
-.container-wide {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.terminal-window {
-  width: 100%;
-  margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .terminal-window {
-    width: 70%;
-  }
-}
-
-/* Responsive Labels */
-.label-desktop {
-  display: none;
-}
-.label-mobile {
-  display: inline;
-}
-
-@media (min-width: 768px) {
-  .label-desktop {
-    display: inline;
-  }
-  .label-mobile {
-    display: none;
-  }
-}
-
 /* Utilities */
 .text-primary {
   color: var(--color-primary);
@@ -391,48 +357,10 @@ nav a:hover {
   }
 
   /* CONTACT SECTION */
-
-  /* CONTACT SECTION */
   /* Fix huge "Ready_to_Launch?" header */
   #contact h2 {
     font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
     word-break: break-all; /* Ensure underscores break if needed */
     width: 100%;
-  }
-
-  /* TERMINAL FORM FIXES */
-  /* Target the container of the inputs */
-  #contact .mono {
-    padding: 1rem !important; /* Reduce padding */
-  }
-
-  /* Stack Label (> Enter_Repo:) and Input */
-  #contact .mono > div > div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  /* Ensure form takes full width */
-  #contact .mono form {
-    width: 100%;
-    display: block !important; /* Override inline-block */
-  }
-
-  /* Reset margins for stacked layout */
-  #contact .mono input {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-top: 0.5rem;
-    font-size: 16px !important;
-    background: rgba(255, 255, 255, 0.1) !important; /* Hint at input area */
-    padding: 0.5rem;
-  }
-
-  /* Allow normal wrapping for text, don't break mid-word */
-  #contact .mono span {
-    word-break: normal;
-    white-space: nowrap; /* Keep label on one line if possible */
   }
 }
