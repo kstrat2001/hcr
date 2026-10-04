@@ -14,7 +14,6 @@ HCR doesn't collect any visitor data. Every call to action sends visitors to Dar
 
 - [AdonisJS 6](https://adonisjs.com) (Node.js, TypeScript)
 - [Inertia.js](https://inertiajs.com) with React 19, built with Vite
-- PostgreSQL
 
 ## Pages
 
@@ -28,28 +27,23 @@ All outbound Darkly Energized links are built in `inertia/lib/de_links.ts`, whic
 
 ## Local development
 
-Requirements: Node.js 24+ and a local PostgreSQL database.
+Requirements: Node.js 24+. No database is needed.
 
 ```bash
 npm ci
 cp .env.example .env
 node ace generate:key      # writes APP_KEY into .env
-# edit .env with your local database settings
-node ace migration:run
 npm run dev                # http://localhost:3333 by default
 ```
 
 ### Environment variables
 
-Set these in `.env` (see `.env.example`). Never commit `.env` or real credentials.
+Set these in `.env` (see `.env.example`). Never commit `.env` or real credentials. These are the only variables the app reads; HCR has no database, mail, sessions or auth.
 
 | Variable | Purpose |
 | --- | --- |
 | `TZ`, `PORT`, `HOST`, `LOG_LEVEL`, `NODE_ENV` | Server basics |
 | `APP_KEY` | App secret, generate with `node ace generate:key` |
-| `SESSION_DRIVER` | `cookie` or `memory` |
-| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_DATABASE` | PostgreSQL connection |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `NOTIFICATION_EMAIL` | Mail settings, still required by config but unused now that HCR sends no email |
 
 ## Scripts
 
