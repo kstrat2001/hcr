@@ -58,10 +58,30 @@ Set these in `.env` (see `.env.example`). Never commit `.env` or real credential
 | `npm run dev` | Dev server with hot reload |
 | `npm run build` | Production build into `build/` |
 | `npm start` | Run the built server (`node bin/server.js`) |
-| `npm test` | Test suite |
+| `npm test` | Test suite (Japa: `tests/unit`, `tests/functional`) |
+| `npm run preview` | Local preview: opens each page in its own browser window (see below) |
+| `npm run test:e2e` | The same page checks, headless |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript check |
 | `npm run format` | Prettier |
+
+## Local preview
+
+`npm run preview` is a local preview tool. It uses Playwright (`playwright.config.ts`, `tests/e2e/preview.spec.ts`) to open `/`, `/pricing` and `/terminal` in separate headed Chromium windows. Each window stays open until you close it; the run ends when the last one is closed.
+
+On every page it checks:
+
+- the page loads with the expected heading
+- the footer credits Darkly Energized LLC and links to its Terms, Privacy Policy and Disclaimer
+- the calls to action link to Darkly Energized with `utm_*` tags
+- `/terminal` answers with a 301 to `darklyenergized.com/projects/new`
+- the browser console shows no errors and the page throws no uncaught exceptions
+
+If any check fails, the run fails.
+
+`npm run test:e2e` runs the same checks headless and exits. It stubs every request that isn't to localhost, so it works offline and doesn't depend on darklyenergized.com being up. It's a local check only; there's no CI job for it.
+
+Both commands start the dev server on the `PORT` in `.env` (3333 by default), or reuse a server that's already listening on that port. Reuse only checks that something answers there, so make sure that's HCR. You need a `.env` (see Local development). The first time, install the browser with `npx playwright install chromium`.
 
 ## Deploying
 

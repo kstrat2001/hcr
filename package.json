@@ -11,7 +11,9 @@
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "preview": "PREVIEW=1 playwright test",
+    "test:e2e": "playwright test"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
@@ -39,6 +41,7 @@
     "@japa/assert": "^4.0.1",
     "@japa/plugin-adonisjs": "^4.0.0",
     "@japa/runner": "^4.2.0",
+    "@playwright/test": "^1.63.0",
     "@swc/core": "1.11.24",
     "@types/luxon": "^3.7.1",
     "@types/node": "^22.15.18",
