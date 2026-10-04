@@ -1,6 +1,6 @@
 import { Link, Head } from '@inertiajs/react'
 import { ReactNode } from 'react'
-import { DE_LEGAL, DE_LOGO, DE_ORIGIN, startProjectUrl } from '../../lib/de_links'
+import { DE_LEGAL, DE_LOGO, DE_ORIGIN } from '../../lib/de_links'
 
 interface Props {
   children: ReactNode
@@ -32,7 +32,7 @@ export default function MainLayout({ children }: Props) {
             <a href="/#trap">[The_Trap]</a>
             <a href="/#solution">[Solution]</a>
             <a href="/#bio">[Who_Am_I]</a>
-            <a href={startProjectUrl('nav')}>[Start_Project]</a>
+            <Link href="/pricing">[Models]</Link>
           </nav>
         </div>
       </header>
@@ -62,8 +62,7 @@ export default function MainLayout({ children }: Props) {
           </p>
           <p style={{ marginTop: '0.5rem' }}>
             <a href={DE_LEGAL.terms}>[Terms]</a> <a href={DE_LEGAL.privacy}>[Privacy]</a>{' '}
-            <a href={DE_LEGAL.disclaimer}>[Disclaimer]</a>{' '}
-            <a href={startProjectUrl('footer')}>[Start_Project]</a>
+            <a href={DE_LEGAL.disclaimer}>[Disclaimer]</a> <Link href="/pricing">[Models]</Link>
           </p>
         </div>
       </footer>
