@@ -41,7 +41,6 @@ export default function Pricing() {
         'A scoped feature or a full app, built with you',
         'Tests and evals included from the start',
         'Code you own, reviewed before it ships',
-        'Handoff docs so your team can keep building',
       ],
       cta: '[Scope_a_Build]',
       color: '#00e5ff', // Cyan
