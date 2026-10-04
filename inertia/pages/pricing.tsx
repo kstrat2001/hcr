@@ -57,7 +57,11 @@ export default function Pricing() {
         <div className="text-center" style={{ marginBottom: '4rem' }}>
           <h1
             className="mono text-primary"
-            style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', marginBottom: '1rem', whiteSpace: 'nowrap' }}
+            style={{
+              fontSize: 'clamp(1.8rem, 5vw, 3rem)',
+              marginBottom: '1rem',
+              whiteSpace: 'nowrap',
+            }}
           >
             &gt; Human_Models
           </h1>
@@ -111,11 +115,11 @@ export default function Pricing() {
             >
               <div style={{ flex: 1, minWidth: '260px' }}>
                 <p style={{ color: '#e0e0e0', fontSize: '1.15rem', marginBottom: '1rem' }}>
-                  Human Code Reader reviews are run by Darkly Energized. Tell us about your project
-                  and we'll scope it.
+                  All models are delivered by{' '}
+                  <span style={{ whiteSpace: 'nowrap' }}>Darkly Energized</span>.
                 </p>
                 <div className="mono" style={{ fontSize: '0.8rem', color: '#666' }}>
-                  &gt; Next: create a Darkly Energized account, then describe the project.
+                  &gt; Next: scope it on Darkly Energized.
                 </div>
               </div>
               <a
@@ -182,11 +186,17 @@ export default function Pricing() {
                 </div>
               )}
 
-              <div className="mono" style={{ color: '#666', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+              <div
+                className="mono"
+                style={{ color: '#666', marginBottom: '0.5rem', fontSize: '0.9rem' }}
+              >
                 Model_{p.id}
               </div>
 
-              <h2 className="mono" style={{ color: p.color, fontSize: '2rem', marginBottom: '1rem' }}>
+              <h2
+                className="mono"
+                style={{ color: p.color, fontSize: '2rem', marginBottom: '1rem' }}
+              >
                 {p.name}
               </h2>
 
@@ -194,7 +204,10 @@ export default function Pricing() {
 
               <ul style={{ listStyle: 'none', marginBottom: '3rem', flex: 1 }}>
                 {p.features.map((f, i) => (
-                  <li key={i} style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center' }}>
+                  <li
+                    key={i}
+                    style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'center' }}
+                  >
                     <span style={{ color: p.color, marginRight: '0.75rem' }}>&gt;</span>
                     {f}
                   </li>
