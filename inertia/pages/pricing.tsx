@@ -6,48 +6,45 @@ export default function Pricing() {
   const models = [
     {
       id: '001',
-      name: 'VIBE_CHECK',
-      content: 'vibe_check',
-      desc: 'Sanity check for new AI-generated projects.',
+      name: 'CODE_AUDIT',
+      content: 'audit',
+      desc: 'A senior engineer reads your code.',
       features: [
-        'Architecture Review (High Level)',
-        'Tech Stack Feasibility',
-        'Red/Yellow/Green Report',
-        '48-Hour Turnaround',
+        'Security review: we look for SQL injection, XSS, and gaps in auth',
+        'Architecture and database schema review',
+        'Performance and cloud-cost hotspots',
+        'A written report with prioritized fixes',
       ],
-      cta: '[Scope_a_Check]',
+      cta: '[Scope_an_Audit]',
       color: '#ffbd2e', // Warning Yellow
     },
     {
       id: '002',
-      name: 'DEEP_AUDIT',
-      content: 'deep_audit',
-      desc: 'Full security & logic analysis before launch.',
+      name: 'EVALS_AND_TESTS',
+      content: 'evals_tests',
+      desc: 'We write your evals.',
       features: [
-        'Deep code review + testing',
-        'Security Check',
-        'Compliance Check',
-        'Database Schema Check',
-        'Performance Check',
-        'Comprehensive Report',
+        'Unit and end-to-end test frameworks set up for your codebase',
+        'Evals for your AI features, so you can tell when a prompt or model change makes things worse',
+        'Test runs wired into your workflow, so regressions get caught before deploy',
+        'Handoff docs so your team, or your AI tools, can keep the tests current',
       ],
-      cta: '[Scope_an_Audit]',
+      cta: '[Scope_Evals_and_Tests]',
       color: '#00ff41', // Primary Green
       recommended: true,
     },
     {
       id: '003',
-      name: 'FRACTIONAL_CTO',
-      content: 'fractional_cto',
-      desc: 'Ongoing protection against architectural entropy.',
+      name: 'FEATURE_OR_APP',
+      content: 'build',
+      desc: 'We build it, tested from day one.',
       features: [
-        'Monthly Reporting',
-        'Monthly Architecture Review',
-        'Monthly Security Checkup',
-        'Dev Team Mentorship',
-        'Direct Text Message Access',
+        'A scoped feature or a full app, built with you',
+        'Tests and evals included from the start',
+        'Code you own, reviewed before it ships',
+        'Handoff docs so your team can keep building',
       ],
-      cta: '[Scope_a_Retainer]',
+      cta: '[Scope_a_Build]',
       color: '#00e5ff', // Cyan
     },
   ]
@@ -234,6 +231,8 @@ export default function Pricing() {
         <div className="text-center" style={{ marginTop: '4rem' }}>
           <p className="mono" style={{ color: '#666' }}>
             // Every engagement is scoped to your codebase.
+            <br />
+            // Deliverables are set in your Statement of Work.
           </p>
         </div>
       </section>

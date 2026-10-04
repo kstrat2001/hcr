@@ -103,13 +103,16 @@ test('pricing', async ({ page, problems }) => {
     'href',
     `${DE_START}pricing`
   )
-  for (const tier of ['vibe_check', 'deep_audit', 'fractional_cto']) {
+  for (const tier of ['audit', 'evals_tests', 'build']) {
     await expect(
       page.locator(`a[href="${DE_START}pricing&utm_content=${tier}"]`),
       `tier link ${tier}`
     ).toHaveCount(1)
   }
   await expect(page.getByText(/\$\d/)).toHaveCount(0)
+  await expect(page.locator('h2')).toHaveText(['CODE_AUDIT', 'EVALS_AND_TESTS', 'FEATURE_OR_APP'])
+  await expect(page.getByText('Deliverables are set in your Statement of Work.')).toBeVisible()
+  await expect(page.getByText(/FRACTIONAL_CTO|VIBE_CHECK|DEEP_AUDIT/)).toHaveCount(0)
   await checkFooter(page)
   expect(problems).toEqual([])
   await holdOpen(page)
