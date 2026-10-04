@@ -1,7 +1,6 @@
-import { Head } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import MainLayout from '../components/layout/MainLayout'
 import Typewriter from '../components/common/Typewriter'
-import { startProjectUrl } from '../lib/de_links'
 import ScanningVisual from '../components/common/ScanningVisual'
 
 export default function Home() {
@@ -44,9 +43,9 @@ export default function Home() {
             </span>
             .
           </p>
-          <a href={startProjectUrl('home_cta', 'hero')} className="btn-primary mono">
+          <Link href="/pricing" className="btn-primary mono">
             [Get_Reviewed]
-          </a>
+          </Link>
         </div>
 
         {/* NEW VISUAL: The X-Ray Scanner */}
@@ -261,7 +260,7 @@ export default function Home() {
                 <div>
                   <span className="text-primary">$ check_skills</span>
                   <br />
-                  &gt; Typescript, Swift, Java, C++, Python, etc 
+                  &gt; Typescript, Swift, Java, C++, Python, etc
                   <br />
                   &gt; Engineering Management, Software Architecture
                   <br />
@@ -286,12 +285,9 @@ export default function Home() {
             Human Code Reader reviews are run by Darkly Energized. Tell us about your project and
             we'll scope it.
           </p>
-          <a href={startProjectUrl('home_cta', 'contact')} className="btn-primary mono">
-            [Start_a_Project]
-          </a>
-          <p className="mono" style={{ marginTop: '1.5rem', fontSize: '0.9rem' }}>
-            <a href="/pricing">[Compare_Models]</a>
-          </p>
+          <Link href="/pricing" className="btn-primary mono">
+            [View_Models]
+          </Link>
         </div>
       </section>
     </MainLayout>

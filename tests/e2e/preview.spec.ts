@@ -74,9 +74,10 @@ async function checkFooter(page: Page) {
   ]) {
     await expect(footer.getByRole('link', { name, exact: true })).toHaveAttribute('href', href)
   }
-  await expect(footer.getByRole('link', { name: '[Start_Project]' })).toHaveAttribute(
+  await expect(footer.getByRole('link', { name: '[Models]' })).toHaveAttribute('href', '/pricing')
+  await expect(page.locator('header nav').getByRole('link', { name: '[Models]' })).toHaveAttribute(
     'href',
-    `${DE_START}footer`
+    '/pricing'
   )
 }
 
@@ -87,8 +88,13 @@ test('home', async ({ page, problems }) => {
   await expect(page.getByRole('heading', { name: 'Ready_to_Launch?' })).toBeVisible()
   await expect(page.getByRole('link', { name: '[Get_Reviewed]' })).toHaveAttribute(
     'href',
-    `${DE_START}home_cta&utm_content=hero`
+    '/pricing'
   )
+  await expect(page.getByRole('link', { name: '[View_Models]' })).toHaveAttribute(
+    'href',
+    '/pricing'
+  )
+  await expect(page.locator('header, footer').locator('a[href*="projects/new"]')).toHaveCount(0)
   await expect(page.locator('form, input, textarea')).toHaveCount(0)
   await checkFooter(page)
   expect(problems).toEqual([])
@@ -103,13 +109,16 @@ test('pricing', async ({ page, problems }) => {
     'href',
     `${DE_START}pricing`
   )
-  for (const tier of ['vibe_check', 'deep_audit', 'fractional_cto']) {
+  for (const tier of ['audit', 'evals_tests', 'build']) {
     await expect(
       page.locator(`a[href="${DE_START}pricing&utm_content=${tier}"]`),
       `tier link ${tier}`
     ).toHaveCount(1)
   }
   await expect(page.getByText(/\$\d/)).toHaveCount(0)
+  await expect(page.locator('h2')).toHaveText(['CODE_AUDIT', 'EVALS_AND_TESTS', 'FEATURE_OR_APP'])
+  await expect(page.getByText('Deliverables are set in your Statement of Work.')).toBeVisible()
+  await expect(page.getByText(/FRACTIONAL_CTO|VIBE_CHECK|DEEP_AUDIT/)).toHaveCount(0)
   await checkFooter(page)
   expect(problems).toEqual([])
   await holdOpen(page)
