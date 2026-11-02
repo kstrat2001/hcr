@@ -138,10 +138,10 @@ jobs:
           script_stop: true
           script: mkdir -p /opt/hcr
 
-      # Copy the compose file and the script, then run the script as a file.
+      # Copy the compose file and the deploy script, then run the script as a file.
       # script_stop splits a streamed script on newlines and would break the
-      # cutover script, so the remote command is one bash invocation.
-      - name: Copy compose file and cutover script
+      # script, so the remote command is one bash invocation.
+      - name: Copy compose file and deploy script
         uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -151,7 +151,7 @@ jobs:
           target: /opt/hcr
           overwrite: true
 
-      - name: Pull and cut over from PM2
+      - name: Pull image and start the container
         uses: appleboy/ssh-action@v1.2.5
         env:
           GHCR_USER: ${{ github.actor }}
