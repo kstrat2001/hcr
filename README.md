@@ -79,7 +79,48 @@ Both commands start the dev server on the `PORT` in `.env` (3333 by default), or
 
 ## Deploying
 
-Build with `npm run build`, put a production `.env` in `build/`, install production dependencies there, and run `node bin/server.js` behind a reverse proxy that handles HTTPS.
+Production is a container, not a git checkout. Merging does not deploy. There is no deploy on push or pull request.
+
+Operators deploy by hand: **Actions → Deploy → Run workflow**. The workflow builds `ghcr.io/kstrat2001/hcr`, checks the image serves `/` with status 200, then SSHs to the VPS and runs `docker compose pull` / `up`. The optional `ref` input defaults to `main`.
+
+The image is `node:24.22.2-slim` (Node 24 LTS, patch pinned on 2026-11-02). It is not the floating `node:24-slim` tag, and it is not darklyenergized's `node:24.19-slim` pin. Inside the container the process listens on `HOST=0.0.0.0`. Compose publishes that port on the VPS loopback only (`127.0.0.1:3773`), which is what Caddy already proxies. Caddy is not changed by a deploy.
+
+### GitHub secrets
+
+Set these on the hcr repo (the same names darklyenergized uses). The workflow has no default values for them.
+
+| Secret | What it is |
+| --- | --- |
+| `VPS_HOST` | SSH host of the production VPS |
+| `VPS_USER` | SSH user that can run Docker and, for the first cutover, PM2 |
+| `VPS_SSH_KEY` | Private key for that user |
+
+GHCR login uses the workflow's `GITHUB_TOKEN`. Do not put tokens, hostnames, or `.env` values in the repo.
+
+### VPS layout
+
+| Path | What it is |
+| --- | --- |
+| `/opt/hcr/docker-compose.yml` | Copied from this repo on each deploy |
+| `/opt/hcr/.env` | Production env. Not in git. The container reads it. |
+| `/opt/hcr/ENV.txt` | A reminder written by the deploy script |
+| `/root/hcr` | The old PM2 checkout. Deploys do not delete it. |
+
+`.env` is `TZ`, `PORT`, `HOST`, `LOG_LEVEL`, `APP_KEY`, `NODE_ENV`. `SESSION_DRIVER` is ignored if it is still there; this app has no database, redis, or sessions.
+
+`HOST` and `PORT` in that file are for the process **inside** the container. The host bind is compose's job. Use `HOST=0.0.0.0` and `PORT=3773`. `NODE_ENV=production`.
+
+### First cutover from PM2
+
+PM2 process `hcr` is being retired. Before the first **Run workflow**, copy the env and fix the bind address:
+
+```bash
+cp /root/hcr/.env /opt/hcr/.env
+```
+
+Set `HOST=0.0.0.0` and `PORT=3773` in `/opt/hcr/.env` (`HOST` was right for a process on the host; inside the container it must be `0.0.0.0`). The running workflow then stops and deletes the PM2 process, starts the container on `127.0.0.1:3773`, and curls until `/` returns 200. If `.env` is missing or `HOST` is still a loopback address, the script exits before it touches PM2.
+
+`/root/hcr` stays on disk. If the new container does not become healthy, start the PM2 process again from that checkout. Caddy is untouched either way.
 
 ## License
 
