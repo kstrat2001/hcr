@@ -39,4 +39,5 @@ AdonisJS 6 + Inertia + React. No database, no sessions, no email, no forms.
 - Public repo: never commit secrets, server addresses, email addresses or `.env` values, in code, docs or PR text. Scan the diff before pushing.
 - Never push to `main`. Branch, push, open a PR; Kain merges.
 - There is no CI yet. Run `lint`, `typecheck` and the tests locally before opening a PR, and show UI changes with `npm run preview` or screenshots.
-- Merging does not deploy. Kain deploys by hand on the server.
+- Merging does not deploy. Production deploy is manual: **Actions → Deploy → Run workflow** (`.github/workflows/deploy.yml`). That workflow is `workflow_dispatch` only. Do not add `push`, `pull_request`, or any other trigger, and do not add a CI job that deploys.
+- The VPS runs `/opt/hcr` (GHCR image, loopback port 3773). PM2 process `hcr` is being retired. Deploys must not delete `/root/hcr` or edit Caddy. Secrets `VPS_HOST`, `VPS_USER`, and `VPS_SSH_KEY` live in the GitHub repo settings, same names as darklyenergized. See README "Deploying".

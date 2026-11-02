@@ -1,0 +1,17 @@
+# Production stack for /opt/hcr on the VPS.
+# Caddy on the host already reverse-proxies humancodereader.com to 127.0.0.1:3773.
+# Publish on loopback only. An all-interfaces publish would bypass UFW.
+# HOST=0.0.0.0 belongs in .env (the process inside the container). This file
+# only chooses which host interface receives the port.
+
+name: hcr
+
+services:
+  app:
+    image: ghcr.io/kstrat2001/hcr:latest
+    container_name: hcr
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${PORT:-3773}:${PORT:-3773}"

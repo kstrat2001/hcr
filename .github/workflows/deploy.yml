@@ -1,0 +1,166 @@
+# Deploy Human Code Reader. Manual only.
+#
+# Operators: Actions → Deploy → Run workflow.
+# Merging to main does not deploy. Do not add push, pull_request, schedule,
+# workflow_call, or workflow_run. This file must stay workflow_dispatch only,
+# matching darklyenergized's Deploy workflow.
+
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to build and deploy (branch, tag, or SHA)
+        required: false
+        default: main
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: hcr-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and preflight
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.meta.outputs.sha }}
+      image: ${{ steps.meta.outputs.image }}
+    steps:
+      - name: Check out the requested ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Image name
+        id: meta
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          repo="$(printf '%s' "$REPO" | tr '[:upper:]' '[:lower:]')"
+          echo "sha=${sha}" >> "$GITHUB_OUTPUT"
+          echo "image=ghcr.io/${repo}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push the commit tag
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          provenance: false
+          sbom: false
+          tags: ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.sha }}
+
+      # Fail closed: :latest moves only after the image serves the real page.
+      # A broken build never becomes what the VPS pulls.
+      - name: Preflight the image
+        run: |
+          set -euo pipefail
+          image="${{ steps.meta.outputs.image }}"
+          sha="${{ steps.meta.outputs.sha }}"
+          docker pull "${image}:${sha}"
+          app_key="$(openssl rand -base64 32)"
+          docker rm -f hcr-preflight >/dev/null 2>&1 || true
+          docker run -d --name hcr-preflight \
+            --env HOST=0.0.0.0 \
+            --env PORT=3773 \
+            --env NODE_ENV=production \
+            --env LOG_LEVEL=info \
+            --env TZ=UTC \
+            --env APP_KEY="${app_key}" \
+            --publish 127.0.0.1:3773:3773 \
+            "${image}:${sha}"
+          cleanup() {
+            docker logs hcr-preflight || true
+            docker rm -f hcr-preflight >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+          for _ in $(seq 1 30); do
+            if ! docker inspect -f '{{.State.Running}}' hcr-preflight 2>/dev/null | grep -qx true; then
+              echo "Preflight container exited before it served traffic."
+              exit 1
+            fi
+            body="$(mktemp)"
+            code="$(curl -sS -o "$body" -w '%{http_code}' http://127.0.0.1:3773/ || true)"
+            if [ "$code" = "200" ] && grep -q "Human Code Reader" "$body"; then
+              rm -f "$body"
+              echo "Preflight ok: GET / returned 200."
+              trap - EXIT
+              docker rm -f hcr-preflight >/dev/null
+              exit 0
+            fi
+            rm -f "$body"
+            sleep 1
+          done
+          echo "Preflight failed: GET / did not return 200 with the app shell."
+          exit 1
+
+      - name: Point latest at the preflighted image
+        run: |
+          set -euo pipefail
+          image="${{ steps.meta.outputs.image }}"
+          sha="${{ steps.meta.outputs.sha }}"
+          docker buildx imagetools create --tag "${image}:latest" "${image}:${sha}"
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the preflighted commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.build.outputs.sha }}
+
+      - name: Create /opt/hcr
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: mkdir -p /opt/hcr
+
+      # Copy the compose file and the script, then run the script as a file.
+      # script_stop splits a streamed script on newlines and would break the
+      # cutover script, so the remote command is one bash invocation.
+      - name: Copy compose file and cutover script
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: docker-compose.yml,scripts/vps-cutover.sh
+          target: /opt/hcr
+          overwrite: true
+
+      - name: Pull and cut over from PM2
+        uses: appleboy/ssh-action@v1.2.5
+        env:
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          envs: GHCR_USER,GHCR_TOKEN
+          script_stop: true
+          command_timeout: 10m
+          script: bash /opt/hcr/scripts/vps-cutover.sh
