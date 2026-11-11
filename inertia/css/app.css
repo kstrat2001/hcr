@@ -242,7 +242,8 @@ nav a:hover {
   background: rgba(0, 20, 0, 0.3); /* Darker, more contrast */
 }
 
-/* Tablet Responsiveness */
+/* Tablet and phone: stack the hero so the typing title and the eye visual
+   don't squeeze each other (issue #10, about 820px wide). */
 @media (max-width: 1024px) {
   .hero {
     flex-direction: column;
@@ -296,21 +297,11 @@ nav a:hover {
     width: 100%;
   }
 
-  /* HERO FIXES */
+  /* HERO FIXES (stacking comes from the tablet block above) */
   .hero {
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
     padding-top: 2rem !important;
     height: auto !important;
     width: 100%;
-  }
-
-  .hero > div:first-child {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   /* Dynamic font scaling to prevent longer strings from wrapping */
