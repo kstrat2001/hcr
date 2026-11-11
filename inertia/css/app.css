@@ -242,6 +242,22 @@ nav a:hover {
   background: rgba(0, 20, 0, 0.3); /* Darker, more contrast */
 }
 
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero > div:first-child {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   :root {

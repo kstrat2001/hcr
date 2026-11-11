@@ -1,0 +1,18 @@
+{
+  "command" : "npm run dev",
+  "env" : {
+    "HOST" : "0.0.0.0",
+    "PORT" : "{port}"
+  },
+  "env_from_source" : [
+    ".env"
+  ],
+  "install" : {
+    "command" : "npm ci --no-audit --no-fund",
+    "unless_exists" : "node_modules"
+  },
+  "ready" : {
+    "http" : "/"
+  },
+  "schema_version" : "1.0"
+}
