@@ -158,7 +158,7 @@ export default function Home() {
                 <h3 className="mono text-primary" style={{ marginBottom: '1rem' }}>
                   &gt; Optimization
                 </h3>
-                <p>Cut down AWS bills by fixing inefficient loops.</p>
+                <p>Cut down cloud bills by fixing inefficient loops.</p>
               </div>
             </div>
           </div>
