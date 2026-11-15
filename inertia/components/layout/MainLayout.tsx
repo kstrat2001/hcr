@@ -31,7 +31,7 @@ export default function MainLayout({ children }: Props) {
             <Link href="/">[Home]</Link>
             <a href="/#trap">[The_Trap]</a>
             <a href="/#solution">[Solution]</a>
-            <a href="/#bio">[Who_Am_I]</a>
+            <a href="/#bio">[Who_Is_Kain?]</a>
             <Link href="/pricing">[Models]</Link>
           </nav>
         </div>
