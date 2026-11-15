@@ -174,7 +174,7 @@ export default function Home() {
             </h2>
 
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: '1.8' }}>
-              It started with a <span className="text-primary">TRS-80</span> in the 1990s. I wasn't
+              It started with a <span className="text-primary">TRS-80</span> in the 1970s. I wasn't
               prompting an LLM; I was fighting memory limits and syntax errors by hand.
             </p>
 
